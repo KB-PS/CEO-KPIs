@@ -1,0 +1,10 @@
+.DS_Store
+.spyproject/
+.streamlit/secrets.toml
+__pycache__/
+jira-1.svg
+jira.jpeg
+slack.html
+slack.svg
+slack2.png
+test.csv
