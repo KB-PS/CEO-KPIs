@@ -5,4 +5,3 @@ numpy
 datetime
 altair
 jira
-enum
