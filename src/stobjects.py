@@ -27,7 +27,6 @@ class KpiComponent():
         self.actual = 0
         self.last_planned = 0
         self.client = keboola_client
-        self.set_up_message()
         self.fill_form()
         
     def select_kpi(self):
@@ -53,12 +52,13 @@ class KpiComponent():
         return ch
     
     def set_up_message(self):
-        base_msg = f"KPI metric: {self.kpi_name} from ({self.dfrom} to {self.dto}.)"
+        base_msg = f"KPI metric: {self.kpi_name} (from {self.dfrom} to {self.dto})."
         base_msg = base_msg + f" Real value: {self.actual}, planned value: {self.last_planned}. "
         self.base_msg = base_msg + "CEO comment: "
     
     def fill_form(self):
         self.select_kpi()
+        self.set_up_message()
         self.form = st.form(self.kpi_name)
         self.form.metric(self.kpi_name, f"{self.actual} (curr.)/ {self.last_planned} (plan)", np.round(
             self.actual - self.last_planned, decimals=DECIMALS))
@@ -66,9 +66,8 @@ class KpiComponent():
         self.form.altair_chart(ch, use_container_width=True)
         slack = self.form.checkbox('Slack')
         jira = self.form.checkbox('Jira')
-        #text_message = self.form.expander("text input")
         with self.form.expander("Notification message"):
-            notif = st.text_input(label="Insert Slack Comment", disabled=False)
+            notif = st.text_input(label="CEO comment", disabled=False)
             #slacknotif = st.text_input(label="Insert Slack Comment", disabled=False)
             #jirasummary = st.text_input(label="Insert Jira Summary", disabled=False)
 
@@ -76,7 +75,7 @@ class KpiComponent():
         if send_notif:
             if slack:
                 value = ntf.send_slack_notification(self.client, self.base_msg + notif)
-                st.write(f"Slack notification status: {value}")
+                st.write(f"Slack notification status: table {value}")
             if jira:
                 value = ntf.create_new_jira_issue(jira_cli, ntf.IssueType.TASK, self.base_msg + notif)
                 st.write(f"Jira notification status: {value}")

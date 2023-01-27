@@ -8,3 +8,5 @@ slack.html
 slack.svg
 slack2.png
 test.csv
+kpi_data
+src/__pycache__/

@@ -3,9 +3,16 @@ import pandas as pd
 import numpy as np
 import streamlit as st
 from src.stobjects import KpiComponent
+from src.settings import keboola_client
 
 st.set_page_config(layout="wide")
 #st.title('💰 KPI Dashboard')
+
+@st.experimental_memo(ttl=7200)
+def read_df(table_id, index_col=None, date_col=None):
+    keboola_client.tables.export_to_file(table_id, '.')
+    table_name = table_id.split(".")[-1]
+    return pd.read_csv(table_name, index_col=index_col, parse_dates=date_col)
 
 # 1 mock a dataframe
 message = "from inside2 false"
@@ -16,7 +23,8 @@ with open("style.css")as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 date_from_c, date_to_c = st.columns(2)
-df = pd.read_csv("data.csv", parse_dates=["date"])
+
+df = read_df("in.c-empower_kpis.kpi_data", date_col=["date"])
 df.sort_values(by="date", inplace=True)
 
 with date_from_c:
