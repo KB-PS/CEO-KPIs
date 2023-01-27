@@ -18,7 +18,6 @@ from src.settings import DECIMALS
 class KpiComponent():
     def __init__(self, data:pd.DataFrame(), kpi_name:str, agg_function, dto, dfrom, decimals=DECIMALS):
         self.kpi_name = kpi_name
-        self.base_msg = f"{self.kpi_name} alert. CEO comment: "
         self.data = data
         self.agg_function = agg_function
         self.dto = dto
@@ -28,6 +27,7 @@ class KpiComponent():
         self.actual = 0
         self.last_planned = 0
         self.client = keboola_client
+        self.set_up_message()
         self.fill_form()
         
     def select_kpi(self):
@@ -51,7 +51,12 @@ class KpiComponent():
             y='actual_value'
         )
         return ch
-        
+    
+    def set_up_message(self):
+        base_msg = f"KPI metric: {self.kpi_name} from ({self.dfrom} to {self.dto}.)"
+        base_msg = base_msg + f" Real value: {self.actual}, planned value: {self.last_planned}. "
+        self.base_msg = base_msg + "CEO comment: "
+    
     def fill_form(self):
         self.select_kpi()
         self.form = st.form(self.kpi_name)
@@ -63,17 +68,15 @@ class KpiComponent():
         jira = self.form.checkbox('Jira')
         #text_message = self.form.expander("text input")
         with self.form.expander("Notification message"):
-            #st.checkbox("xxx")
-            slacknotif = st.text_input(label="Insert Slack Comment", disabled=False)
-            jirasummary = st.text_input(label="Insert Jira Summary", disabled=False)
+            notif = st.text_input(label="Insert Slack Comment", disabled=False)
+            #slacknotif = st.text_input(label="Insert Slack Comment", disabled=False)
+            #jirasummary = st.text_input(label="Insert Jira Summary", disabled=False)
 
-        #textj = self.form.text_input("aa")
         send_notif = self.form.form_submit_button("Send notifications")
         if send_notif:
-            #st.write(texti)
             if slack:
-                value = ntf.send_slack_notification(self.client, self.base_msg + slacknotif)
+                value = ntf.send_slack_notification(self.client, self.base_msg + notif)
                 st.write(f"Slack notification status: {value}")
             if jira:
-                value = ntf.create_new_jira_issue(jira_cli, ntf.IssueType.TASK, jirasummary)
+                value = ntf.create_new_jira_issue(jira_cli, ntf.IssueType.TASK, self.base_msg + notif)
                 st.write(f"Jira notification status: {value}")
