@@ -1,21 +1,19 @@
-# 📦 Streamlit App Starter Kit 
-```
-⬆️ (Replace above with your app's name)
-```
+# CEO KPIs
 
-Description of the app ...
+## About
+The application has been designed for the Keboola Empower conference (March 2023). 
+It connects to a Keboola bucket and reads a table. 
 
-## Demo App
+Table is split into multiple widgets, each of which tracks its own metric. The metric
+is then compared against the target. 
 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://starter-kit.streamlitapp.com/)
+## Keboola dependency
+The data is read from https://connection.north-europe.azure.keboola.com/admin/projects/10708/storage/in.c-empower_kpis
 
-## Section Heading
+## Notifications
+### Slack
+Slack notification is performed using an orchestration in Keboola (https://connection.north-europe.azure.keboola.com/admin/projects/10708/flows/33397273)
 
-This is filler text, please replace this with text for this section.
+### Jira
+Jira notification is sent directly from streamlit. New issue is then created under the TEST-Streamlit project (https://keboola.atlassian.net/jira/software/projects/STR/boards/210)
 
-## Further Reading
-
-This is filler text, please replace this with a explanatory text about further relevant resources for this repo
-- Resource 1
-- Resource 2
-- Resource 3
