@@ -1,6 +1,7 @@
 import datetime
 import pandas as pd
 import numpy as np
+import os
 import streamlit as st
 from src.stobjects import KpiComponent
 from src.settings import keboola_client
@@ -19,7 +20,8 @@ message = "from inside2 false"
 rec = [{'channel':'tmp_streamlit_slack', 'text':message}]
 
 # LINK TO THE CUSTOM CSS FILE
-with open("./style.css")as f:
+dir_path = os.path.dirname(os.path.realpath(__file__))
+with open(dir_path + "/style.css")as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 date_from_c, date_to_c = st.columns(2)
