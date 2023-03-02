@@ -12,12 +12,12 @@ from kbcstorage.client import Client
 DECIMALS = 1
 
 # jira
-SERVER = st.secrets["jira_credentials"]["server"]
-USER_EMAIL = st.secrets["jira_credentials"]["email"]
-JIRA_API_TOKEN = st.secrets["jira_credentials"]["jira_api_token"]
+SERVER = st.secrets["jira_credentials_server"]
+USER_EMAIL = st.secrets["jira_credentials_email"]
+JIRA_API_TOKEN = st.secrets["jira_credentials_token"]
 jira_cli = init_jira_client(SERVER, USER_EMAIL, JIRA_API_TOKEN)
 
 # credentials
-KEBOOLA_STACK = st.secrets["keboola_credentials"]["stack"]
-KEBOOLA_TOKEN = st.secrets["keboola_credentials"]["token"]
+KEBOOLA_STACK = st.secrets["kbc_url"]
+KEBOOLA_TOKEN = st.secrets["kbc_token"]
 keboola_client = Client(KEBOOLA_STACK, KEBOOLA_TOKEN)
