@@ -19,7 +19,7 @@ message = "from inside2 false"
 rec = [{'channel':'tmp_streamlit_slack', 'text':message}]
 
 # LINK TO THE CUSTOM CSS FILE
-with open("style.css")as f:
+with open("./style.css")as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 date_from_c, date_to_c = st.columns(2)
@@ -57,4 +57,3 @@ with c_avg_order:
     customersc = KpiComponent(df, "average_order_value", np.sum, dto=DTO, dfrom=DFROM)
 with c_conv_rate:
     customersc = KpiComponent(df, "conversion_rate", np.sum, dto=DTO, dfrom=DFROM)
-    
