@@ -14,7 +14,7 @@ DECIMALS = 1
 # jira
 SERVER = st.secrets["jira_credentials_server"]
 USER_EMAIL = st.secrets["jira_credentials_email"]
-JIRA_API_TOKEN = st.secrets["jira_credentials_token"]
+JIRA_API_TOKEN = st.secrets["#jira_credentials_token"]
 jira_cli = init_jira_client(SERVER, USER_EMAIL, JIRA_API_TOKEN)
 
 # credentials
