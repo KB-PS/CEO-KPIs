@@ -11,7 +11,7 @@ import streamlit as st
 import numpy as np
 import altair as alt
 import src.notifications as ntf
-from src.settings import jira_cli
+#from src.settings import jira_cli
 from src.settings import keboola_client
 from src.settings import DECIMALS
 
