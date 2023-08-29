@@ -9,6 +9,13 @@ from src.settings import DATA_TABLE_PATH
 st.set_page_config(layout="wide")
 #st.title('💰 KPI Dashboard')
 
+try:
+    st.dataframe(pd.read_csv("/data/in/tables/data.csv"))
+except:
+    st.dataframe(pd.read_csv("/data/in/files/data.csv")) 
+
+
+
 for ffile in os.walk('.'):
     st.write(ffile)
 
