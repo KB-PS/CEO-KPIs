@@ -9,6 +9,10 @@ from src.settings import DATA_TABLE_PATH
 st.set_page_config(layout="wide")
 #st.title('💰 KPI Dashboard')
 
+for ffile in os.walk('.'):
+    st.write(ffile)
+
+
 @st.experimental_memo(ttl=7200)
 def read_df(TABLE_PATH, index_col=None, date_col=None):
     return pd.read_csv(TABLE_PATH,  index_col=index_col, parse_dates=date_col)
