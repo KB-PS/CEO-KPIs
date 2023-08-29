@@ -11,9 +11,10 @@ st.set_page_config(layout="wide")
 
 @st.experimental_memo(ttl=7200)
 def read_df(table_id, index_col=None, date_col=None):
-    keboola_client.tables.export_to_file(table_id, '.')
-    table_name = table_id.split(".")[-1]
-    return pd.read_csv(table_name, index_col=index_col, parse_dates=date_col)
+    return pd.read_csv('/data/in/table/your_data.csv',  index_col=index_col, parse_dates=date_col)
+    #keboola_client.tables.export_to_file(table_id, '.')
+    #table_name = table_id.split(".")[-1]
+    #return pd.read_csv(table_name, index_col=index_col, parse_dates=date_col)
 
 # 1 mock a dataframe
 message = "from inside2 false"
