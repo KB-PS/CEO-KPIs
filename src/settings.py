@@ -23,4 +23,4 @@ KEBOOLA_TOKEN = st.secrets["kbc_token"]
 keboola_client = Client(KEBOOLA_STACK, KEBOOLA_TOKEN)
 
 # keboola settings
-DATA_TABLE_PATH = 'data/in/tables/data.csv'
+DATA_TABLE_PATH = '/data/in/tables/data.csv'
