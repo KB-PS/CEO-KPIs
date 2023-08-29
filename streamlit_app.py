@@ -4,14 +4,14 @@ import numpy as np
 import os
 import streamlit as st
 from src.stobjects import KpiComponent
-#from src.settings import keboola_client
+from src.settings import DATA_TABLE_PATH
 
 st.set_page_config(layout="wide")
 #st.title('💰 KPI Dashboard')
 
 @st.experimental_memo(ttl=7200)
-def read_df(table_id, index_col=None, date_col=None):
-    return pd.read_csv('/data/in/table/your_data.csv',  index_col=index_col, parse_dates=date_col)
+def read_df(TABLE_PATH, index_col=None, date_col=None):
+    return pd.read_csv(TABLE_PATH,  index_col=index_col, parse_dates=date_col)
     #keboola_client.tables.export_to_file(table_id, '.')
     #table_name = table_id.split(".")[-1]
     #return pd.read_csv(table_name, index_col=index_col, parse_dates=date_col)
@@ -27,7 +27,7 @@ with open(dir_path + "/style.css")as f:
 
 date_from_c, date_to_c = st.columns(2)
 
-df = read_df("in.c-empower_kpis.kpi_data", date_col=["date"])
+df = read_df(DATA_TABLE_PATH, date_col=["date"])
 df.sort_values(by="date", inplace=True)
 
 with date_from_c:

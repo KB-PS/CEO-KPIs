@@ -21,3 +21,6 @@ DECIMALS = 1
 KEBOOLA_STACK = st.secrets["kbc_url"]
 KEBOOLA_TOKEN = st.secrets["kbc_token"]
 keboola_client = Client(KEBOOLA_STACK, KEBOOLA_TOKEN)
+
+# keboola settings
+DATA_TABLE_PATH = '/data/in/table/data.csv'
