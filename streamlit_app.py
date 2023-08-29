@@ -10,14 +10,12 @@ st.set_page_config(layout="wide")
 #st.title('💰 KPI Dashboard')
 
 try:
+    st.write("reading tables")
     st.dataframe(pd.read_csv("/data/in/tables/data.csv"))
 except:
+    st.write("reading files")
     st.dataframe(pd.read_csv("/data/in/files/data.csv")) 
 
-
-
-for ffile in os.walk('.'):
-    st.write(ffile)
 
 
 @st.experimental_memo(ttl=7200)
