@@ -7,23 +7,10 @@ from src.stobjects import KpiComponent
 from src.settings import DATA_TABLE_PATH, SHOPIFY_TABLE_PATH
 
 st.set_page_config(layout="wide")
-#st.title('💰 KPI Dashboard')
 
-#try:
-#    st.write("reading tables")
-#    st.dataframe(pd.read_csv("/data/in/tables/data.csv"))
-#except:
-#    st.write("reading files")
-#    st.dataframe(pd.read_csv("/data/in/files/data.csv")) 
-
-
-
-@st.experimental_memo(ttl=7200)
+@st.cache_data()
 def read_df(table_path, index_col=None, date_col=None):
     return pd.read_csv(table_path,  index_col=index_col, parse_dates=date_col)
-    #keboola_client.tables.export_to_file(table_id, '.')
-    #table_name = table_id.split(".")[-1]
-    #return pd.read_csv(table_name, index_col=index_col, parse_dates=date_col)
 
 # 1 mock a dataframe
 message = "from inside2 false"
