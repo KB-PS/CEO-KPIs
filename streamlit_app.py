@@ -4,7 +4,7 @@ import numpy as np
 import os
 import streamlit as st
 from src.stobjects import KpiComponent
-from src.settings import keboola_client
+#from src.settings import keboola_client
 
 st.set_page_config(layout="wide")
 #st.title('💰 KPI Dashboard')
