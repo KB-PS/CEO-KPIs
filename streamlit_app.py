@@ -48,14 +48,14 @@ c_sales, c_orders, c_new_customers = st.columns(3)
 with c_sales:
     salesc = KpiComponent(df_shopify, "sales", np.sum, dto=DTO, dfrom=DFROM)
 with c_orders:
-    ordersc = KpiComponent(df, "orders", np.mean, dto=DTO, dfrom=DFROM)
+    ordersc = KpiComponent(df_shopify, "orders", np.mean, dto=DTO, dfrom=DFROM)
 with c_new_customers:
-    customersc = KpiComponent(df, "new_customers", np.sum, dto=DTO, dfrom=DFROM)
+    customersc = KpiComponent(df_shopify, "new customers", np.sum, dto=DTO, dfrom=DFROM)
 
 c_margin, c_avg_order, c_conv_rate = st.columns(3)
 with c_margin:
-    customersc = KpiComponent(df, "on_time_delivery", np.sum, dto=DTO, dfrom=DFROM)
+    customersc = KpiComponent(df_shopify, "total customers", np.sum, dto=DTO, dfrom=DFROM)
 with c_avg_order:
-    customersc = KpiComponent(df, "average_order_value", np.sum, dto=DTO, dfrom=DFROM)
-with c_conv_rate:
-    customersc = KpiComponent(df, "conversion_rate", np.sum, dto=DTO, dfrom=DFROM)
+    customersc = KpiComponent(df_shopify, "average order value", np.sum, dto=DTO, dfrom=DFROM)
+#with c_conv_rate:
+#    customersc = KpiComponent(df, "conversion_rate", np.sum, dto=DTO, dfrom=DFROM)
